@@ -63,7 +63,9 @@ public:
 	void SetType(E_GEM_TYPES newType) { m_eGemType = newType; };
 
 	void SetY(float newY) { m_sprite->setPositionY(newY); };
-
+	
+	//sprite functions
+	void playExplosion(void);
 };
 
 #endif

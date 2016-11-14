@@ -3,27 +3,24 @@
 
 #include <iostream>
 #include "cocos2d.h"
+#include "Scene_inGame.h"
+#include "Scene_Menu.h"
 
 //game states
 enum E_GAME_STATE {
-	E_GAME_NORMAL,
-	E_GAME_REMOVE,
-	E_GAME_CREATE,
-	E_GAME_REST,
-	E_GAME_TOTAL
+	E_MENU,
+	E_INGAME,
+	E_OPTIONS,
+	E_TOTAL,
 };
 
 class CGSM
 {
 public:
-
 	CGSM();
 	~CGSM();
 	E_GAME_STATE m_eGameState;
-	float m_fdeltatime;
-
-	void UpdateGSM(float dt);
-
+	
 	void setGameState(E_GAME_STATE newState);
 	E_GAME_STATE getGameState(void);
 };

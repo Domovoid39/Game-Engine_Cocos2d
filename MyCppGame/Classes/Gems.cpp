@@ -43,3 +43,30 @@ void CGems::ChangeTexture(E_GEM_TYPES newtype)
 void CGems::Update(void)
 {
 }
+
+//plays sprite explosion attached , NOTE: not by sprite sheet, its individual images
+void CGems::playExplosion(void)
+{
+	USHORT spriteFrames = 4;
+
+	Vector<SpriteFrame*> animFrames(spriteFrames);
+	char str[100] = { 0 };
+	for (int i = 1; i < spriteFrames; i++)
+	{
+		sprintf(str, "Animations/Explosion_%d.png", i);
+		auto frame = SpriteFrame::create(str, Rect(0, 0, 64, 64));
+		//SpriteFrame frame = cache->getSpriteFrameByName(str);
+		animFrames.pushBack(frame);
+	}
+
+	auto animation = Animation::createWithSpriteFrames(animFrames, 0.05f);
+	auto animate = Animate::create(animation);
+	animation->setRestoreOriginalFrame(true);
+	
+	auto callback = CallFunc::create([this]() {
+		this->ChangeTexture(E_EMPTY);
+	});
+
+	cocos2d::CCFiniteTimeAction* animationSequence = cocos2d::CCSequence::create(animate, callback, nullptr);
+	m_sprite->runAction(animationSequence);
+}
